@@ -4,14 +4,12 @@ class TaskList {
   constructor() {
     this.size = 0;
     this.ul = document.getElementById('task-list');
-    this.savedList = JSON.parse(localStorage.getItem('savedList')) || [{ description: 'Time to read', completed: false, index: 0 }, { description: 'Fix linters', completed: false, index: 1 }, { description: 'Do the homework', completed: false, index: 2 }];
-    // localStorage.setItem('savedList', this.savedList);
+    this.savedList = [{ description: 'Time to read', completed: false, index: 0 }, { description: 'Fix linters', completed: false, index: 1 }, { description: 'Do the homework', completed: false, index: 2 }];
     this.displayAllTask();
   }
 
   clearList() {
     this.savedList = [];
-    localStorage.setItem('savedList', JSON.stringify(this.savedList));
     this.displayAllTask();
   }
 
@@ -24,7 +22,6 @@ class TaskList {
 
   addTask(book) {
     this.savedList.push(book);
-    localStorage.setItem('savedList', JSON.stringify(this.savedList));
     this.size += 1;
   }
 
