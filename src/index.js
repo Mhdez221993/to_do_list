@@ -4,8 +4,8 @@ class TaskList {
   constructor() {
     this.size = 0;
     this.ul = document.getElementById('task-list');
-    this.savedList = JSON.parse(localStorage.getItem('savedList')) || [];
-    // this.displayAllTask();
+    this.savedList = [{ description: 'Time to read', completed: false, index: 0 }, { description: 'Fix linters', completed: false, index: 1 }, { description: 'Do the homework', completed: false, index: 2 }]
+    || JSON.parse(localStorage.getItem('savedList'));
   }
 
   clearList() {
