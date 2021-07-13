@@ -1,20 +1,61 @@
 import './style.css';
 
-import _ from 'lodash';
-import printMe from './print.js';
+class TaskList {
+  constructor() {
+    this.index = 0;
+    this.ul = document.getElementById('task-list');
+    this.savedList = JSON.parse(localStorage.getItem('savedList')) || [];
+    this.displayAllTask();
+  }
 
-function component() {
-  const element = document.createElement('div');
-  const btn = document.createElement('button');
+  clearList() {
+    this.savedList = [];
+    localStorage.setItem('savedList', JSON.stringify(this.savedList));
+    this.displayAllTask();
+  }
 
-  // Lodash, currently included via a script, is required for this line to work
-  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-  element.classList.add('hello');
-  btn.innerHTML = 'Click me and check the console!';
-  btn.onclick = printMe;
+  addIndex() {
+    if (this.savedList.length < 1) {
+      return this.index;
+    }
+    return this.savedList[this.savedList.length - 1].index + 1;
+  }
 
-  element.appendChild(btn);
-  return element;
+  addTask(book) {
+    this.savedList.push(book);
+    localStorage.setItem('savedList', JSON.stringify(this.savedList));
+  }
+
+  displayAllTask() {
+    this.ul.innerHTML = '';
+    this.savedList.forEach((task) => {
+      const li = document.createElement('li');
+      const index = document.createElement('spand');
+
+      index.innerHTML = task.index;
+      li.innerHTML = task.description;
+
+      li.appendChild(index);
+      this.ul.appendChild(li);
+    });
+  }
 }
 
-document.body.appendChild(component());
+const newList = new TaskList();
+
+document.getElementById('input-task')
+  .addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      const v = e.target.value;
+
+      newList.addTask({ description: v, completed: false, index: newList.addIndex() });
+      newList.displayAllTask();
+
+      e.target.value = '';
+      e.preventDefault();
+    }
+  });
+
+document.getElementById('clear-all-task').addEventListener('click', () => {
+  newList.clearList();
+});
