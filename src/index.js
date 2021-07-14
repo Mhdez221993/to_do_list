@@ -1,11 +1,12 @@
 import './style.css';
 
+import dragAndDrop from './dragAndDrop';
+
 class TaskList {
   constructor() {
     this.size = 0;
     this.ul = document.getElementById('task-list');
-    this.savedList = [{ description: 'Time to read', completed: false, index: 0 }, { description: 'Fix linters', completed: false, index: 1 }, { description: 'Do the homework', completed: false, index: 2 }]
-    || JSON.parse(localStorage.getItem('savedList'));
+    this.savedList = JSON.parse(localStorage.getItem('savedList')) || [];
   }
 
   clearList() {
@@ -16,7 +17,7 @@ class TaskList {
 
   addIndex() {
     if (this.savedList.length < 1) {
-      return this.index;
+      return this.size;
     }
     return this.savedList[this.savedList.length - 1].index + 1;
   }
@@ -33,6 +34,9 @@ class TaskList {
     this.savedList.forEach((task) => {
       const li = document.createElement('li');
       li.className = 'list-item';
+      li.draggable = 'true';
+      li.addEventListener('dragstart', dragAndDrop);
+      li.addEventListener('dragend', dragAndDrop);
 
       const checkbox = document.createElement('input');
       checkbox.type = 'checkbox';
@@ -51,6 +55,7 @@ class TaskList {
       li.appendChild(index);
       li.appendChild(button);
       this.ul.appendChild(li);
+      this.ul.addEventListener('dragover', dragAndDrop);
     });
   }
 }

@@ -45,7 +45,7 @@ body {
 }
 
 .index {
-  color: transparent;
+  /* color: transparent; */
 }
 
 .icon {
@@ -58,4 +58,9 @@ body {
   border: none;
   padding: 10px 0;
   color: rgb(99, 97, 97);
+}
+
+.list-item.dragging {
+  opacity: 0.5;
+  background-color: red;
 }
