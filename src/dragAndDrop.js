@@ -3,9 +3,11 @@ let target;
 function sorting(source, target) {
   const savedList = JSON.parse(localStorage.getItem('savedList'));
   if (savedList.length < 2) return;
+
   const sourceObj = savedList[source];
   const souceIndex = savedList[source].index;
   let targetIndex;
+  // eslint-disable-next-line array-callback-return
   savedList.map((obj) => {
     if (obj.index === Number(target)) {
       targetIndex = savedList.indexOf(obj);

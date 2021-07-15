@@ -43,7 +43,6 @@ class TaskList {
       li.draggable = 'true';
       li.addEventListener('dragstart', (e) => {
         dragAndDrop(e, i);
-        this.displayAllTask();
       });
 
       li.addEventListener('dragend', (e) => {
