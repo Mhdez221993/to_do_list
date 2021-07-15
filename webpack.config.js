@@ -5,6 +5,7 @@ module.exports = {
   mode: 'development',
   entry: {
     index: './src/index.js',
+    dragAndDrop: './src/dragAndDrop.js',
   },
   devtool: 'inline-source-map',
   devServer: {

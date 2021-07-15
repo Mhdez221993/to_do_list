@@ -1,11 +1,13 @@
 import './style.css';
 
+import dragAndDrop from './dragAndDrop';
+import statusUpdate from './statusUpdate';
+
 class TaskList {
   constructor() {
     this.size = 0;
     this.ul = document.getElementById('task-list');
-    this.savedList = [{ description: 'Time to read', completed: false, index: 0 }, { description: 'Fix linters', completed: false, index: 1 }, { description: 'Do the homework', completed: false, index: 2 }]
-    || JSON.parse(localStorage.getItem('savedList'));
+    this.savedList = JSON.parse(localStorage.getItem('savedList')) || [];
   }
 
   clearList() {
@@ -16,7 +18,7 @@ class TaskList {
 
   addIndex() {
     if (this.savedList.length < 1) {
-      return this.index;
+      return this.size;
     }
     return this.savedList[this.savedList.length - 1].index + 1;
   }
@@ -27,16 +29,36 @@ class TaskList {
     this.size += 1;
   }
 
+  updateList() {
+    this.savedList = JSON.parse(localStorage.getItem('savedList')) || [];
+  }
+
   displayAllTask() {
     this.ul.innerHTML = '';
+    this.updateList();
 
-    this.savedList.forEach((task) => {
+    this.savedList.forEach((task, i) => {
       const li = document.createElement('li');
       li.className = 'list-item';
+      li.draggable = 'true';
+      li.addEventListener('dragstart', (e) => {
+        dragAndDrop(e, i);
+      });
+
+      li.addEventListener('dragend', (e) => {
+        dragAndDrop(e, i);
+        this.displayAllTask();
+      });
 
       const checkbox = document.createElement('input');
       checkbox.type = 'checkbox';
       checkbox.className = 'checkbox';
+      checkbox.checked = task.completed;
+      checkbox.addEventListener('change', (e) => {
+        statusUpdate(e, i);
+        this.displayAllTask();
+      });
+
       const p = document.createElement('p');
       const index = document.createElement('spand');
       index.className = 'index';
@@ -51,6 +73,9 @@ class TaskList {
       li.appendChild(index);
       li.appendChild(button);
       this.ul.appendChild(li);
+      this.ul.addEventListener('dragover', (e) => {
+        dragAndDrop(e, i);
+      });
     });
   }
 }
