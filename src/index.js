@@ -28,8 +28,13 @@ class TaskList {
     this.size += 1;
   }
 
+  updateList() {
+    this.savedList = JSON.parse(localStorage.getItem('savedList')) || [];
+  }
+
   displayAllTask() {
     this.ul.innerHTML = '';
+    this.updateList();
 
     this.savedList.forEach((task, i) => {
       const li = document.createElement('li');
@@ -41,6 +46,7 @@ class TaskList {
 
       li.addEventListener('dragend', (e) => {
         dragAndDrop(e, i);
+        this.displayAllTask();
       });
 
       const checkbox = document.createElement('input');
