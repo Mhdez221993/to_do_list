@@ -43,6 +43,7 @@ class TaskList {
       li.draggable = 'true';
       li.addEventListener('dragstart', (e) => {
         dragAndDrop(e, i);
+        this.displayAllTask();
       });
 
       li.addEventListener('dragend', (e) => {
@@ -53,8 +54,10 @@ class TaskList {
       const checkbox = document.createElement('input');
       checkbox.type = 'checkbox';
       checkbox.className = 'checkbox';
+      checkbox.checked = task.completed;
       checkbox.addEventListener('change', (e) => {
         statusUpdate(e, i);
+        this.displayAllTask();
       });
 
       const p = document.createElement('p');
