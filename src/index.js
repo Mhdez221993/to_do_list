@@ -65,10 +65,6 @@ class TaskList {
       });
     });
   }
-
-  display() {
-    console.log('nothing to display!!!');
-  }
 }
 
 const newList = new TaskList();
@@ -93,5 +89,3 @@ document.getElementById('clear-all-task').addEventListener('click', () => {
 window.addEventListener('load', () => {
   newList.displayAllTask();
 });
-
-export default newList;

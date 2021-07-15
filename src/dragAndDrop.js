@@ -1,4 +1,3 @@
-import newList from './index'
 let target;
 
 function sorting(source, target) {
@@ -12,14 +11,12 @@ function sorting(source, target) {
     }
   });
 
-  // const targetObj = savedList[targetIndex];
   savedList[source].index = savedList[targetIndex].index;
   savedList[targetIndex].index = souceIndex;
 
   savedList[source] = savedList[targetIndex];
   savedList[targetIndex] = sourceObj;
   localStorage.setItem('savedList', JSON.stringify(savedList));
-  newList.displayAllTask();
 }
 
 export default function dragAndDrop(event, index) {
@@ -32,7 +29,6 @@ export default function dragAndDrop(event, index) {
     case 'dragend':
       event.target.classList.remove('dragging');
       sorting(source, target);
-      //   location.reload();
       break;
     case 'dragover':
       if (event.target.className === 'list-item') {
