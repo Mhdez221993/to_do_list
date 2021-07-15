@@ -1,36 +1,43 @@
-let source; let
-  target;
+import newList from './index'
+let target;
 
-function swap(source, target) {
+function sorting(source, target) {
   const savedList = JSON.parse(localStorage.getItem('savedList'));
-  let sourceIndex;
+  const sourceObj = savedList[source];
+  const souceIndex = savedList[source].index;
   let targetIndex;
   savedList.map((obj) => {
-    if (obj.index === Number(source)) {
-      sourceIndex = savedList.indexOf(obj);
-    } else if (obj.index === Number(target)) {
+    if (obj.index === Number(target)) {
       targetIndex = savedList.indexOf(obj);
     }
   });
 
-  savedList[targetIndex] = savedList[sourceIndex];
+  // const targetObj = savedList[targetIndex];
+  savedList[source].index = savedList[targetIndex].index;
+  savedList[targetIndex].index = souceIndex;
+
+  savedList[source] = savedList[targetIndex];
+  savedList[targetIndex] = sourceObj;
   localStorage.setItem('savedList', JSON.stringify(savedList));
+  newList.displayAllTask();
 }
 
-export default function dragAndDrop(event) {
+export default function dragAndDrop(event, index) {
   const newEvent = event.type;
+  const source = index;
   switch (newEvent) {
     case 'dragstart':
       event.target.classList.add('dragging');
-      source = event.target.children[2].innerHTML;
       break;
     case 'dragend':
       event.target.classList.remove('dragging');
-      swap(source, target);
-    //   location.reload();
+      sorting(source, target);
+      //   location.reload();
       break;
     case 'dragover':
-      target = event.target.children[2].innerHTML;
+      if (event.target.className === 'list-item') {
+        target = event.target.children[2].innerHTML;
+      }
       break;
     default:
       break;

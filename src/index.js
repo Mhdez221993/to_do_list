@@ -31,12 +31,17 @@ class TaskList {
   displayAllTask() {
     this.ul.innerHTML = '';
 
-    this.savedList.forEach((task) => {
+    this.savedList.forEach((task, i) => {
       const li = document.createElement('li');
       li.className = 'list-item';
       li.draggable = 'true';
-      li.addEventListener('dragstart', dragAndDrop);
-      li.addEventListener('dragend', dragAndDrop);
+      li.addEventListener('dragstart', (e) => {
+        dragAndDrop(e, i);
+      });
+
+      li.addEventListener('dragend', (e) => {
+        dragAndDrop(e, i);
+      });
 
       const checkbox = document.createElement('input');
       checkbox.type = 'checkbox';
@@ -55,8 +60,14 @@ class TaskList {
       li.appendChild(index);
       li.appendChild(button);
       this.ul.appendChild(li);
-      this.ul.addEventListener('dragover', dragAndDrop);
+      this.ul.addEventListener('dragover', (e) => {
+        dragAndDrop(e, i);
+      });
     });
+  }
+
+  display() {
+    console.log('nothing to display!!!');
   }
 }
 
@@ -82,3 +93,5 @@ document.getElementById('clear-all-task').addEventListener('click', () => {
 window.addEventListener('load', () => {
   newList.displayAllTask();
 });
+
+export default newList;
