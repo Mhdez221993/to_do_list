@@ -1,6 +1,7 @@
 import './style.css';
 
 import dragAndDrop from './dragAndDrop';
+import statusUpdate from './statusUpdate';
 
 class TaskList {
   constructor() {
@@ -52,6 +53,10 @@ class TaskList {
       const checkbox = document.createElement('input');
       checkbox.type = 'checkbox';
       checkbox.className = 'checkbox';
+      checkbox.addEventListener('change', (e) => {
+        statusUpdate(e, i);
+      });
+
       const p = document.createElement('p');
       const index = document.createElement('spand');
       index.className = 'index';

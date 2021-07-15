@@ -2,6 +2,7 @@ let target;
 
 function sorting(source, target) {
   const savedList = JSON.parse(localStorage.getItem('savedList'));
+  if (savedList.length < 2) return;
   const sourceObj = savedList[source];
   const souceIndex = savedList[source].index;
   let targetIndex;
