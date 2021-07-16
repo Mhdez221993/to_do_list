@@ -1,7 +1,7 @@
 import newTask from './addAndRemove';
 
 document.getElementById('input-task')
-  .addEventListener('keypress', (e, i) => {
+  .addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
       const v = e.target.value;
 
