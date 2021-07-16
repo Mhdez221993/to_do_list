@@ -37,13 +37,17 @@ class TaskList {
   edditTask(e, i) {
     if (e.key === 'Enter') {
       this.savedList[i].description = e.target.innerHTML;
-      console.log(e.target.innerHTML);
-      console.log(this.savedList[i].description);
       localStorage.setItem('savedList', JSON.stringify(this.savedList));
       this.displayAllTask();
       e.preventDefault();
     }
     e.target.parentNode.children[1].contentEditable = true;
+  }
+
+  deleteTask(e, i) {
+    this.savedList.splice(i, 1);
+    localStorage.setItem('savedList', JSON.stringify(this.savedList));
+    this.displayAllTask();
   }
 
   displayAllTask() {
@@ -76,11 +80,15 @@ class TaskList {
       const index = document.createElement('spand');
       index.className = 'index';
       const button = document.createElement('i');
-      button.classList.add('fa', 'fa-ellipsis-v', 'icon');
+      button.classList.add('fas', 'fa-ellipsis-v', 'icon');
       p.addEventListener('keydown', (e) => {
         this.edditTask(e, i);
       });
       button.addEventListener('click', (e) => {
+        button.classList.add('fa-trash-alt');
+        document.querySelector('.fa-trash-alt').addEventListener('click', (e) => {
+          this.deleteTask(e, i);
+        });
         this.edditTask(e, i);
       });
 
