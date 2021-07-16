@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 import './style.css';
 
 import dragAndDrop from './dragAndDrop';
@@ -11,7 +12,7 @@ class TaskList {
   }
 
   clearList() {
-    this.savedList = [];
+    this.savedList = this.savedList.filter((obj) => obj.completed !== true);
     localStorage.setItem('savedList', JSON.stringify(this.savedList));
     this.displayAllTask();
   }
@@ -30,7 +31,10 @@ class TaskList {
   }
 
   updateList() {
+    let newIndex = 0;
     this.savedList = JSON.parse(localStorage.getItem('savedList')) || [];
+    // eslint-disable-next-line no-return-assign
+    this.savedList.filter((obj) => obj.index = newIndex++);
     localStorage.setItem('savedList', JSON.stringify(this.savedList));
   }
 
