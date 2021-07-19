@@ -2,15 +2,17 @@
 In this project, I build a simple HTML list of To Do tasks. This simple web page is built using webpack and served by a webpack dev server.
 
 
+![screenshot](./to_do_list.png)
 
 ## Built With
 
 - JavaScript
 - Webpack
 
-[](./to_do_list.png)
 
- Live Demo: [](https://mhdez221993.github.io/to_do_list/)
+ ## Live Demo
+
+[Visit the Live Demo](https://mhdez221993.github.io/to_do_list/)
 ## Getting Started
 
 To get a local copy up and running follow these simple example steps.
