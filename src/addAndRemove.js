@@ -1,4 +1,5 @@
 /* eslint-disable no-plusplus */
+
 import './style.css';
 
 import dragAndDrop from './dragAndDrop';
@@ -125,3 +126,5 @@ document.getElementById('clear-all-task').addEventListener('click', () => {
 window.addEventListener('load', () => {
   newList.displayAllTask();
 });
+
+module.exports = newList;
