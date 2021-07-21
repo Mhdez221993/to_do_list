@@ -4,8 +4,6 @@
   "description": "In this project, I build a simple HTML list of To Do tasks. This simple web page is built using webpack and served by a webpack dev server.",
   "private": true,
   "scripts": {
-    "test": "jest",
-    "testing": "jest --watchAll *.js",
     "watch": "webpack --watch",
     "start": "webpack serve --open",
     "build": "webpack",
