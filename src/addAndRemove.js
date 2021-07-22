@@ -126,5 +126,3 @@ document.getElementById('clear-all-task').addEventListener('click', () => {
 window.addEventListener('load', () => {
   newList.displayAllTask();
 });
-
-module.exports = newList;
