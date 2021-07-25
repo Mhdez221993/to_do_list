@@ -1,12 +1,20 @@
-import newTask from './addAndRemove';
+// import newTask from './addAndRemove';
 
-document.getElementById('input-task')
-  .addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-      const v = e.target.value;
+// document.getElementById('input-task')
+//   .addEventListener('keypress', (e) => {
+//     if (e.key === 'Enter') {
+//       const v = e.target.value;
 
-      e.target.value = '';
-      e.preventDefault();
-      newTask(v);
-    }
-  });
+//       e.target.value = '';
+//       e.preventDefault();
+//       newTask(v);
+//     }
+//   });
+
+
+import State from './lib/state'
+import tasks from './utils/tasks'
+
+const AppState = new State();
+
+AppState.update({ tasks });
